@@ -21,13 +21,20 @@ include(msvc_methods)
 MEMADE_SET_CMAKE_CONFIGURATION_TYPES("Debug;Release;")
 
 #Project generic header definition
-include_directories(${LOCAL_SRC_PATH})
-include_directories(${LOCAL_COMMON_INCLUDE_PATH})
-include_directories(${LCOAL_PROJECTS_3RDPARTY_PATH})
+#include_directories(${LOCAL_SRC_PATH})
+#include_directories(${LOCAL_COMMON_INCLUDE_PATH})
+#include_directories(${LCOAL_PROJECTS_3RDPARTY_PATH})
 
 option(ENABLE_MSVC_CRT_MT_${MAIN_PROJECT_NAME_UPPER} "Enable ${PROJECT_NAME} msvc crt /MT /MTd compile." ON)
 
 MEMADE_SET_CMAKETARGETS_FOLDER()
+
+MEMADE_OUTPATHCONFIG("bin" "" "")
+add_subdirectory(${CURRENT_SOLUTION_DIR}/src/core/)
+
+add_subdirectory(${CURRENT_SOLUTION_DIR}/tests/testwinui/)
+set_target_properties(testwinui PROPERTIES FOLDER "tests")
+MEMADE_OUTPATHCONFIG("")
 
 #[[
 MEMADE_OUTPATHCONFIG("bin/${CMAKE_VS_PLATFORM_NAME}/${VS_CONFIGURATION}/components/" "" "" ON)

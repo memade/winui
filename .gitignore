@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+build/
+lib/
+bin/
+objs/
+.vs/
