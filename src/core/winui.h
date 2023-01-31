@@ -4,16 +4,26 @@
 namespace local {
 
  class Winui final : public IWinui {
+  std::shared_ptr<std::mutex> m_Mutex = std::make_shared<std::mutex>();
  public:
   Winui();
   virtual ~Winui();
+ private:
+  void Init();
+  void UnInit();
  public:
   void Release() const override final;
+  IConfig* ConfigGet() const override final;
+  IWxui* CreateWxui() const override final;
+ private:
+  Config* m_pConfig = nullptr;
+  IWxui* m_pWxui = nullptr;
  };
 
 
 
  extern Winui* __gpWinui;
+ extern HINSTANCE __gpHinstance;
 }///namespace local
 
 /// /*_ Memade®（新生™） _**/

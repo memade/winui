@@ -4,6 +4,12 @@
 #include <win.h>
 #include <winui.hpp>
 using namespace winui;
+
+#include "config.h"
+#include "uibase.h"
+#include "gui.h"
+#include "dui.h"
+#include "wxui.h"
 #include "winui.h"
 #include "export.h"
 

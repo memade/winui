@@ -16,10 +16,37 @@
 #include <dllinterface.h>
 
 namespace winui {
+ using TypeIdentify = unsigned long long;
+
+
+ class IConfig {
+ public:
+  virtual void Release() const = 0;
+ };
+
+ class IGui {
+ public:
+  virtual void Release() const = 0;
+ };
+
+ class IDui {
+ public:
+  virtual void Release() const = 0;
+ };
+
+ class IWxui {
+ public:
+  virtual const TypeIdentify& Identify() const = 0;
+  virtual bool Start() = 0;
+  virtual void Stop() = 0;
+  virtual void Release() const = 0;
+ };
 
  class IWinui : public shared::InterfaceDll<IWinui> {
  public:
   virtual void Release() const = 0;
+  virtual IConfig* ConfigGet() const = 0;
+  virtual IWxui* CreateWxui() const = 0;
  };
 
 

@@ -9,7 +9,9 @@ int main(int argc, char** argv) {
 
  auto pWinui = winui::IWinui::CreateInterface(R"(D:\__Github__\Windows\projects\winui\bin\x64\Debug\winui.dll)");
 
+ auto pWxui = pWinui->CreateWxui();
 
+ pWxui->Start();
 
  shared::Win::MainProcess(
   [&](const std::string& input, bool& exit) {
