@@ -18,6 +18,9 @@ namespace local {
   void MainProcess() override final;
  protected:
   TypeIdentify m_Identify = 0;
+ private:
+  shared::wx::Theme* m_pTheme1 = nullptr;
+  shared::wx::Theme* m_pTheme2 = nullptr;
  };
 
 }///namespace local

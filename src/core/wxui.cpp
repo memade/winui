@@ -42,6 +42,8 @@ namespace local {
     break;
    ::SendMessageW(shared::GlobalWindowConfigGet()->hMain, WM_CLOSE, 0, 0);
    ::WaitForSingleObject(m_hUIMain, INFINITE);
+   SK_DELETE_PTR(m_pTheme1);
+   SK_DELETE_PTR(m_pTheme2);
    m_IsOpenUI.store(false);
   } while (0);
  }
@@ -57,16 +59,18 @@ namespace local {
    wxInitializer wxinit;
    if (!wxinit.IsOk())
     break;
+
+
    auto app = wxDynamicCast(wxApp::GetInstance(), shared::wx::IwxApp);
    app->RegisterAppCreateFrameEventCb(
     [&](wxFrame* frame) {
      frame->SetSize(100, 100);
-   auto theFrame = wxDynamicCast(frame, shared::wx::IwxFrameSkin);
+   m_pTheme1 = new shared::wx::Theme("0", R"(C:\Users\k34ub\Desktop\theme\2\shape.png)", R"(C:\Users\k34ub\Desktop\theme\2\bgk.png)");
+   m_pTheme2 = new shared::wx::Theme("1", R"(C:\Users\k34ub\Desktop\theme\GodOfWealth.png)", R"(C:\Users\k34ub\Desktop\theme\GodOfWealth.png)");
 
-   auto theme0 = new shared::wx::Theme("0", R"(C:\Users\k34ub\Desktop\theme\2\shape.png)", R"(C:\Users\k34ub\Desktop\theme\2\bgk.png)");
-   auto theme1 = new shared::wx::Theme("1", R"(C:\Users\k34ub\Desktop\theme\GodOfWealth.png)", R"(C:\Users\k34ub\Desktop\theme\GodOfWealth.png)");
-   theFrame->AppendTheme(theme0);
-   theFrame->AppendTheme(theme1);
+   auto theFrame = wxDynamicCast(frame, shared::wx::IwxFrameSkin);
+   theFrame->AppendTheme(m_pTheme1);
+   theFrame->AppendTheme(m_pTheme2);
    theFrame->SetTheme();
    theFrame->Center();
    //frame->SetBackgroundColour(wxColour(RGB(0, 0, 0)));

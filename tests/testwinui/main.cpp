@@ -11,16 +11,24 @@ int main(int argc, char** argv) {
 
  auto pWxui = pWinui->CreateWxui();
 
- pWxui->Start();
+ if (pWxui->Start()) {
 
- shared::Win::MainProcess(
-  [&](const std::string& input, bool& exit) {
+ }
+ else {
+  shared::Win::MainProcess(
+   [&](const std::string& input, bool& exit) {
 
-   if (input == "q") {
-    winui::IWinui::DestoryInterface(pWinui);
-    exit = true;
-   }
-  });
+    if (input == "q") {
+     exit = true;
+    }
+   });
+ }
+
+ if (pWxui) {
+  pWxui->Stop();
+  pWxui->Release();
+ }
+ winui::IWinui::DestoryInterface(pWinui);
 
  return 0;
 }
